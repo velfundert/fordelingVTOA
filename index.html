@@ -9,13 +9,79 @@
         -->
         <script type="text/javascript" src="csv_parse.js"></script>
         <script type="text/javascript" src="render.js"></script>
+        <script type="text/javascript">
+var r = new FordelingRender();
+
+function myAddField() {
+    r.addField();
+}
+
+function startRead() {  
+    // obtain input element through DOM 
+
+    var file = document.getElementById('filet').files[0];
+    if(file){
+        getAsText(file);
+    }
+}
+
+function getAsText(readFile) {
+
+    var reader = new FileReader();
+
+    // Read file into memory as UTF-8      
+    reader.readAsText(readFile, "UTF-8");
+
+    // Handle progress, success, and errors
+    reader.onprogress = updateProgress;
+    reader.onload = loaded;
+    reader.onerror = errorHandler;
+}
+
+function updateProgress(evt) {
+    if (evt.lengthComputable) {
+        // evt.loaded and evt.total are ProgressEvent properties
+        var loaded = (evt.loaded / evt.total);
+        if (loaded < 1) {
+            // Increase the prog bar length
+            // style.width = (loaded * 200) + "px";
+        }
+    }
+}
+
+function loaded(evt) {  
+    // Obtain the read file data    
+    var fileString = evt.target.result;   
+
+    var p = new CSVparser;
+    p.parse( fileString );
+
+    r.clear();
+    var i = 0;
+    while ( i < p.data.length ) {
+        r.addInstitution( p.data[i][0], p.data[i][1] );
+        i++;
+    }
+  console.log("Done");
+
+}
+
+
+function errorHandler(evt) {
+  if(evt.target.error.name == "NotReadableError") {
+    // The file could not be read
+  }
+}
+
+
+        </script>
 
 
     </head>
     <body>
         <form id="csvDisBitch">
             <label>Last opp en .csv</label><input type="file" id="filet" />
-            <input type="button" value="kjøyr!" onclick="startRead()"/>
+            <input type="button" value="Last inn" onclick="startRead()"/>
         </form>
         <span> eller </span>
         <select id="chooseData">
@@ -26,11 +92,9 @@
 
         <form method="get" id="studentCount">
             <div id="studentNumbers">
-                <input type="text" id="f1" name="f1" value="fraksjon" />
-                <input type="text" id="s1" name="s1" value="studenter" />
             </div>
             <br />
-            <input type="button" onclick="addField()" value=" + " />
+            <input type="button" onclick="myAddField()" value=" + " />
             <br />
             <input type="submit" value="Compute!" />
         </form>
