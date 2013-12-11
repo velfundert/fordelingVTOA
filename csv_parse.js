@@ -51,7 +51,7 @@ function loaded(evt) {
 function CSVparser() {
 
     this.parse = parse;
-    this.splitCSV = splitCSV;
+    this.split = split;
     this.findSep = findSep;
 
     this.data = new Array();
@@ -67,13 +67,14 @@ function CSVparser() {
             var j = CSVString.indexOf("\n", i);
             if (j == -1) j = CSVString.length;
 
-            this.data.push( this.splitCSV( CSVString.substr( i, j-i) ) );
+            this.data.push( this.split( CSVString.substr( i, j-i) ) );
 
             i = j+1;
         }
     }
 
-    function splitCSV( line ) {
+    function split( line ) {
+        // FIXME add some code to translate , to .
         return line.split( this.sep );
     }
 
