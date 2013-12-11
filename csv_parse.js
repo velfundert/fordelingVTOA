@@ -40,8 +40,7 @@ function loaded(evt) {
 
   var i = 0;
   while ( i < p.data.length ) {
-      console.log( p.data[i][0] );
-      console.log( p.data[i][1] );
+      addInstitution( p.data[i][0], p.data[i][1] );
       i++;
   }
   console.log("Done");
@@ -74,8 +73,11 @@ function CSVparser() {
     }
 
     function split( line ) {
-        // FIXME add some code to translate , to .
-        return line.split( this.sep );
+        // some code that fixes wild decimal separators ( , to . )
+        var temp = line.split( this.sep );
+        temp[0] = temp[0].replace(",",".");
+        return temp
+        // return line.split( this.sep );
     }
 
     function findSep( line ) {
