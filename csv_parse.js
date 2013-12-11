@@ -33,26 +33,64 @@ function updateProgress(evt) {
 
 function loaded(evt) {  
   // Obtain the read file data    
-  var fileString = evt.target.result;
+  var fileString = evt.target.result;   
 
-  var i=0;
-  var ttrg = document.getElementById("teeekst");
+  var p = new CSVparser;
+  p.parse( fileString );
 
-  while (i < fileString.length) {
-      var j = fileString.indexOf("\n", i);
-      if (j == -1) j = fileString.length;
-
-      console.log("i er " + i + " og j er " + j );
-      var ttemp = document.createElement("p");
-      ttemp.innerHTML = fileString.substr(i, j-i);
-      // console.log( fileString.substr(i, j-i) );
-      // console.log( " pupp " );
-      ttrg.appendChild( ttemp );
-
-      i = j+1;
+  var i = 0;
+  while ( i < p.data.length ) {
+      console.log( p.data[i][0] );
+      console.log( p.data[i][1] );
+      i++;
   }
+  console.log("Done");
 
-  // document.getElementById("teeekst").innerHTML=fileString;
+}
+
+function CSVparser() {
+
+    this.parse = parse;
+    this.splitCSV = splitCSV;
+    this.findSep = findSep;
+
+    this.data = new Array();
+    this.sep = ',';
+
+    function parse( CSVString ) {
+
+        var i=0;
+
+        this.findSep( CSVString.substr( 0, CSVString.indexOf("\n",0) ) );
+
+        while (i < CSVString.length) {
+            var j = CSVString.indexOf("\n", i);
+            if (j == -1) j = CSVString.length;
+
+            this.data.push( this.splitCSV( CSVString.substr( i, j-i) ) );
+
+            i = j+1;
+        }
+    }
+
+    function splitCSV( line ) {
+        return line.split( this.sep );
+    }
+
+    function findSep( line ) {
+        var i = line.indexOf(",");
+        if ( i != -1 ) return;
+
+        i = line.indexOf(";");
+
+        if ( i != -1 ) {
+            this.sep = ";";
+            console.log("separator is ; which isn't really the standard is it");
+            return;
+        }
+
+        console.log("could not determine separator!");
+    }
 
 }
 
@@ -61,3 +99,5 @@ function errorHandler(evt) {
     // The file could not be read
   }
 }
+
+

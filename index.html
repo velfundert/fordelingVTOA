@@ -1,77 +1,41 @@
 <!doctype html>
 <html>
-  <head>
-    <title>Ja</title>
-    <!--
-<link rel='stylesheet' id='responsive-style-css'  href='http://www.studentvelferd.no/wp-content/themes/responsive/style.css?ver=1.9.3.4' type='text/css' media='all' />
-<link rel='stylesheet' id='responsive-media-queries-css'  href='http://www.studentvelferd.no/wp-content/themes/responsive/core/css/style.css?ver=1.9.3.4' type='text/css' media='all' />
-<link rel='stylesheet' id='responsive-child-style-css'  href='http://www.studentvelferd.no/wp-content/themes/velferdstinget-responsive/style.css?ver=1.9.3.4' type='text/css' media='all' />
--->
-<script type="text/javascript">
-function startRead() {  
-  // obtain input element through DOM 
-  
-  var file = document.getElementById('filet').files[0];
-  if(file){
-    getAsText(file);
-  }
-}
-
-function getAsText(readFile) {
-        
-  var reader = new FileReader();
-  
-  // Read file into memory as UTF-16      
-  reader.readAsText(readFile, "UTF-8");
-  
-  // Handle progress, success, and errors
-  reader.onprogress = updateProgress;
-  reader.onload = loaded;
-  reader.onerror = errorHandler;
-}
-
-function updateProgress(evt) {
-  if (evt.lengthComputable) {
-    // evt.loaded and evt.total are ProgressEvent properties
-    var loaded = (evt.loaded / evt.total);
-    if (loaded < 1) {
-      // Increase the prog bar length
-      // style.width = (loaded * 200) + "px";
-    }
-  }
-}
-
-function loaded(evt) {  
-  // Obtain the read file data    
-  var fileString = evt.target.result;
-
-  document.getElementById("teeekst").innerHTML=fileString;
-
-}
-
-function errorHandler(evt) {
-  if(evt.target.error.name == "NotReadableError") {
-    // The file could not be read
-  }
-}
-</script>
+    <head>
+        <title>fordelingVTOA</title>
+        <!--
+        <link rel='stylesheet' id='responsive-style-css'  href='http://www.studentvelferd.no/wp-content/themes/responsive/style.css?ver=1.9.3.4' type='text/css' media='all' />
+        <link rel='stylesheet' id='responsive-media-queries-css'  href='http://www.studentvelferd.no/wp-content/themes/responsive/core/css/style.css?ver=1.9.3.4' type='text/css' media='all' />
+        <link rel='stylesheet' id='responsive-child-style-css'  href='http://www.studentvelferd.no/wp-content/themes/velferdstinget-responsive/style.css?ver=1.9.3.4' type='text/css' media='all' />
+        -->
+        <script type="text/javascript" src="csv_parse.js"></script>
+        <script type="text/javascript" src="cosmethics.js"></script>
 
 
-  </head>
-  <body>
-    <form method="get" id="kloro-form">
-      <input type="text" id="f1" name="f1" value="fraksjon" />
-      <input type="text" id="s1" name="s1" value="studenter" />
-      <br />
-      <input type="submit" value="Saint Lagüe this motherfucker!" />
-    </form>
+    </head>
+    <body>
+        <form id="csvDisBitch">
+            <label>Last opp en .csv</label><input type="file" id="filet" />
+            <input type="button" value="kjøyr!" onclick="startRead()"/>
+        </form>
+        <span> eller </span>
+        <select id="chooseData">
+            <option>Velg et datasett</option>
+        </select>
 
-    <form id="csvDisBitch">
-      <label>Last opp en .csv</label><input type="file" id="filet" />
-      <input type="button" value="kjøyr!" onclick="startRead()"/>
-    </form>
+        <hr />
 
-    <p id="teeekst" />
+        <form method="get" id="studentCount">
+            <div id="studentNumbers">
+                <input type="text" id="f1" name="f1" value="fraksjon" />
+                <input type="text" id="s1" name="s1" value="studenter" />
+            </div>
+            <br />
+            <input type="button" onclick="addField()" value=" + " />
+            <br />
+            <input type="submit" value="Compute!" />
+        </form>
 
-  </body>
+        <div id="teeekst" />
+
+    </body>
 </html>
