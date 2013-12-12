@@ -59,7 +59,7 @@ function loaded(evt) {
 
     p.sort();
 
-    var s = new SaintLague( p.data );
+    var s = new SaintLague( p.data, 37 );
     s.wash();
 
     r.clear();
@@ -68,6 +68,14 @@ function loaded(evt) {
         r.addInstitution( s.votes[i][0], s.votes[i][1] );
         i++;
     }
+
+    s.elect();
+    s.result();
+
+    console.log("Stemmefordeling:");
+
+    for (var i = 0; i < s.votelog.length; i++ ) 
+        console.log( s.votelog[i] );
   console.log("Done");
 
 }
