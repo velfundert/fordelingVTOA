@@ -68,12 +68,9 @@ function loaded(evt) {
     }
 
     s.elect();
-    s.result();
 
     r.result( s );
     r.renderProcess( s );
-
-  console.log("Done");
 
 }
 
@@ -94,10 +91,11 @@ function errorHandler(evt) {
             <label>Last opp en .csv</label><input type="file" id="filet" />
             <input type="button" value="Last inn" onclick="startRead()"/>
         </form>
+        <!--
         <span> eller </span>
         <select id="chooseData">
             <option>Velg et datasett</option>
-        </select>
+        </select> -->
 
         <hr />
 

@@ -24,10 +24,12 @@ function SaintLague ( votes, noOfSeats ) {
         }
     }
 
+    /*
     function result() {
         for (var i = 0; i < this.seats.length; i++ ) 
             console.log( this.seats[i][1] + ": " + this.seats[i][0] );
     }
+    '/
 
 
     function wash() {
