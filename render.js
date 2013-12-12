@@ -5,6 +5,10 @@ function FordelingRender() {
     this.addField = addField;
     this.addInstitution = addInstitution;
     this.clear = clear;
+    this.result = result;
+    this.renderProcess = renderProcess;
+
+    console.log("Render loaded");
 
     function addField() {
         this.addInstitution( "Studenter", "Institusjon");
@@ -34,6 +38,26 @@ function FordelingRender() {
        this.institutionCount = 0;
     }
 
+    function result( slInst ) {
+        var line;
+        var resBox = document.getElementById("resultbox");
+        for (var i = 0; i < slInst.seats.length; i++ ) {
+            line = document.createElement("p");
+            line.innerHTML = ""+ slInst.seats[i][1] +" fikk "+ slInst.seats[i][0] +" mandater.";
+            resBox.appendChild( line );
+        }
+
+    }
+
+    function renderProcess( slInst ) {
+        var resBox = document.getElementById("processbox");
+        var line = document.createElement("p");
+        for (var i = 0; i < slInst.votelog.length; i++ ) {
+            line.innerHTML += slInst.votelog[i] +"<br />";
+        }
+        resBox.appendChild( line );
+
+    }
 
 }
 

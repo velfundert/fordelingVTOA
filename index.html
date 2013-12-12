@@ -2,11 +2,9 @@
 <html>
     <head>
         <title>fordelingVTOA</title>
-        <!--
         <link rel='stylesheet' id='responsive-style-css'  href='http://www.studentvelferd.no/wp-content/themes/responsive/style.css?ver=1.9.3.4' type='text/css' media='all' />
         <link rel='stylesheet' id='responsive-media-queries-css'  href='http://www.studentvelferd.no/wp-content/themes/responsive/core/css/style.css?ver=1.9.3.4' type='text/css' media='all' />
         <link rel='stylesheet' id='responsive-child-style-css'  href='http://www.studentvelferd.no/wp-content/themes/velferdstinget-responsive/style.css?ver=1.9.3.4' type='text/css' media='all' />
-        -->
         <script type="text/javascript" src="csv_parse.js"></script>
         <script type="text/javascript" src="render.js"></script>
         <script type="text/javascript" src="saint_lague.js"></script>
@@ -72,10 +70,9 @@ function loaded(evt) {
     s.elect();
     s.result();
 
-    console.log("Stemmefordeling:");
+    r.result( s );
+    r.renderProcess( s );
 
-    for (var i = 0; i < s.votelog.length; i++ ) 
-        console.log( s.votelog[i] );
   console.log("Done");
 
 }
@@ -110,10 +107,16 @@ function errorHandler(evt) {
             <br />
             <input type="button" onclick="myAddField()" value=" + " />
             <br />
-            <input type="submit" value="Compute!" />
+            <!-- <input type="submit" value="Compute!" /> -->
         </form>
 
-        <div id="teeekst" />
+        <p id="notProcessBox"
+        onclick="document.getElementById('processbox').style.display='block';this.style.display='none'"><strong>Klikk for å vise stemmetellingen</strong></p>
+        <div style="display:none" id="processbox"
+            ondblclick="document.getElementById('notProcessBox').style.display='block';document.getElementById('processbox').style.display='none'"
+            ></div>
+
+        <div id="resultbox"></div>
 
     </body>
 </html>

@@ -18,8 +18,7 @@ function SaintLague ( votes, noOfSeats ) {
 
         for (var i = 0; i < this.noOfSeats; i++ ) {
             j = this.voteMax( temp_votes );
-            console.log("Vi valgte " + j );
-            this.votelog.push("" + this.votes[j][1] + " velges: " + temp_votes[j] );
+            this.votelog.push("" + this.votes[j][1] + " får plass "+ (i+1) +", stemmetall: " + temp_votes[j] );
             this.seats[ j ][0] += 1;
             temp_votes[ j ] = this.votes[ j ][0] / ( 2 * this.seats[ j ][0] +1 );
         }
