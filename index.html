@@ -9,6 +9,7 @@
         -->
         <script type="text/javascript" src="csv_parse.js"></script>
         <script type="text/javascript" src="render.js"></script>
+        <script type="text/javascript" src="saint_lague.js"></script>
         <script type="text/javascript">
 var r = new FordelingRender();
 
@@ -56,10 +57,15 @@ function loaded(evt) {
     var p = new CSVparser;
     p.parse( fileString );
 
+    p.sort();
+
+    var s = new SaintLague( p.data );
+    s.wash();
+
     r.clear();
     var i = 0;
-    while ( i < p.data.length ) {
-        r.addInstitution( p.data[i][0], p.data[i][1] );
+    while ( i < s.votes.length ) {
+        r.addInstitution( s.votes[i][0], s.votes[i][1] );
         i++;
     }
   console.log("Done");

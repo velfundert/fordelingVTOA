@@ -3,6 +3,7 @@ function CSVparser() {
     this.parse = parse;
     this.split = split;
     this.findSep = findSep;
+    this.sort = sort;
 
     this.data = new Array();
     this.sep = ',';
@@ -49,6 +50,10 @@ function CSVparser() {
         if ( i != -1 ) return;
 
         console.log("could not determine separator!");
+    }
+
+    function sort() {
+        this.data = this.data.sort( function (a, b) { return b[0] - a[0]; } );
     }
 
 }
