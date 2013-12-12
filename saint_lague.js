@@ -5,7 +5,7 @@ function SaintLague ( votes, noOfSeats ) {
     this.wash = wash;
     this.elect = elect;
     this.voteMax = voteMax;
-    this.result = result;
+    // this.result = result;
 
     this.noOfSeats = noOfSeats;
     this.votes = votes;
@@ -29,7 +29,7 @@ function SaintLague ( votes, noOfSeats ) {
         for (var i = 0; i < this.seats.length; i++ ) 
             console.log( this.seats[i][1] + ": " + this.seats[i][0] );
     }
-    '/
+    */
 
 
     function wash() {
