@@ -18,7 +18,9 @@ function CSVparser() {
             var j = CSVString.indexOf("\n", i);
             if (j == -1) j = CSVString.length;
 
-            this.data.push( this.split( CSVString.substr( i, j-i) ) );
+            if ( !isNaN( CSVString[i]) ) {
+                this.data.push( this.split( CSVString.substr( i, j-i) ) );
+            }
 
             i = j+1;
         }
