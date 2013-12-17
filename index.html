@@ -87,6 +87,7 @@ function errorHandler(evt) {
 
     </head>
     <body>
+        <div style="max-width:35em;margin-left:auto;margin-right:auto;">
         <form id="csvDisBitch">
             <label>Last opp en .csv</label><input type="file" id="filet" />
             <input type="button" value="Last inn" onclick="startRead()"/>
@@ -110,11 +111,11 @@ function errorHandler(evt) {
 
         <p id="notProcessBox"
         onclick="document.getElementById('processbox').style.display='block';this.style.display='none'"><strong>Klikk for å vise stemmetellingen</strong></p>
-        <div style="display:none" id="processbox"
+        <div style="display:none;background-color:#ccc;" id="processbox"
             ondblclick="document.getElementById('notProcessBox').style.display='block';document.getElementById('processbox').style.display='none'"
-            ></div>
+            title="Dobbeltklikk for å lukke"></div>
 
         <div id="resultbox"></div>
-
+        </div>
     </body>
 </html>
