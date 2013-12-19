@@ -1,4 +1,40 @@
 Hvordan bruke denne siden
 =========================
 
-Denne nettsiden 
+Denne nettsiden er et verktøy som enkelt lar deg beregne fordelingen av mandater
+i Velferdstinget i Oslo og Akershus i henhold til vedtektene deres. Du bruker
+verktøyet ved å laste opp en liste over hvor mange studenter hver av de
+tilknyttede institusjonene har, og trykke "Last inn". Dette er fremdeles en
+relativt tidlig versjon, og mer funksjonalitet vil bli lagt til i fremtiden.
+
+Filen du laster opp
+-------------------
+
+Filen du laster opp skal bestå av to kolonner, med antall studenter ved
+institusjonen i den første kolonnen, og navn på institusjonen i den andre. Filen
+må være i .csv-format. Det er ikke noe problem om det er blanke rader eller
+celler i filen, men det er veldig viktig at de eneste tallene i den venstre
+kolonnen er studenttall, og at det bare er to kolonner.
+
+
+#### Eksempel på en tabell:
+
+----------     ---------------------
+studenter          institusjon      
+----------     ---------------------
+27345          Universitet i Oslo   
+
+17017          Høgskolen i O og A   
+
+
+
+                                    
+   15          Eurytmihøgskolen     
+                                    
+                                    
+en tom                              
+celle
+----------     ---------------------
+
+For å lagre tabellen som .csv velger du (i Excel) "Lagre Som", og deretter "CSV"
+i listen over filformater i "Lagre Som"-dialogen.
