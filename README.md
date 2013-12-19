@@ -1,4 +1,6 @@
 fordelingVTOA
 =============
 
-en enkel webside som bergner fordelingen av plasser i Velferdstinget i Oslo og Akershus
+En enkel webside som beregner fordelingen av mandater i Velferdstinget i Oslo og Akershus.
+
+![en slags plan for hvordan prosjektet skal se ut](plan.jpg "Looks like a plan")
