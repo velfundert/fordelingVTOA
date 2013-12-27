@@ -47,7 +47,7 @@ function SaintLague ( votes, noOfSeats ) {
                 temp_votes.push( this.votes[i] );
             } else {
                 temp_valgf += parseFloat( this.votes[i][0] );
-                this.valgforsamling.push( this.votes[i] );
+                this.valgforsamling.push( [ Math.ceil( parseFloat(this.valgforsamling[i][0])/500 ), this.votes[i][1] ] );
             }
         }
 
@@ -86,11 +86,5 @@ function SaintLague ( votes, noOfSeats ) {
             }
         }
         return w;
-    }
-
-    function printVf() {
-        for (var i = 0; i < this.valgforsamling.length; i++ ) {
-            console.log( this.valgforsamling[i][1] + ": " + ceil( parseFloat(this.valgforsamling[i][0])/500 ) );
-        }
     }
 }

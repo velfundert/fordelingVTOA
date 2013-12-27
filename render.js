@@ -59,5 +59,18 @@ function FordelingRender() {
 
     }
 
+    function renderVF( slInst ) {
+        var VFBox = document.getElementById("valgforsamling");
+        var title = document.createElement("h3");
+        title.innerHTML = "Valgforsamling";
+        VFBox.appendChild( title );
+        
+        var line = document.createElement("p");
+        for (var i = 0; i < slInst.valgforsamling.length; i++ ) {
+            line.innerHTML += slInst.valgforsamling[i][1] + ": "+ slInst.valgforsamling[i][0] +" plasser<br />";
+        }
+        VFBox.appendChild( line );
+    }
+
 }
 
