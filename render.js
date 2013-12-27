@@ -63,7 +63,8 @@ function FordelingRender() {
     function renderVF( slInst ) {
         var VFBox = document.getElementById("valgforsamling");
         var title = document.createElement("h3");
-        title.innerHTML = "Valgforsamling";
+        var j = slInst.valgforsamling.reduce( function(a,b) { return a + b[0]; }, 0 );
+        title.innerHTML = "Valgforsamling (" + j + "/" + Math.ceil( j/2 ) + ")";
         VFBox.appendChild( title );
         
         var line = document.createElement("p");
