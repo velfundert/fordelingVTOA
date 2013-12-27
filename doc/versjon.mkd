@@ -1,0 +1,40 @@
+
+Denne nettsiden er et verktøy for å beregne fordelingen av mandater i
+Velferdstinget i Oslo og Akershus, i tråd med Velferdstingets vedtekter.
+Nettsiden *bør* gi et korrekt resultat, men det er ikke garantert, særlig ikke
+etterhvert som vedtektene -- eller praksis -- endres.
+
+Jeg garanterer overhodet ikke at verktøyet gir deg riktig svar, og det er
+selvsagt som med et hvert verktøy at det er du som bruker verktøyet som er
+ansvarlig for riktigheten av resultatet.
+
+> § 4-1 – Beregning av representanter til Velferdstinget i Oslo
+> ------------
+> 
+> Lærestedene i samskipnaden som ikke blir direkte representert i Velferdstinget etter Velferdstingets
+> vedtekter og regler møtes i valgforsamling. Lærestedene som deltar på valgforsamling utgjør til
+> sammen én fraksjon, og ved å legge sammen studenttallet på alle disse lærestedene beregnes hvor
+> mange representanter valgforsamlingen skal velge ut fra Velferdstingets vedtekter og regler.
+ 
+I tillegg til å beregne fordelingen av mandater i Velferdstinget i Oslo og
+Akershus, forteller dette verktøyet deg også hvor mange mandater som finnes i
+*valgforsamlingen* til Velferdstinget, i tråd med §4-1 i Reglementet for
+Valgforsamlingen:
+
+> § 4-2 – Beregning av representanter til valgforsamlingen
+> ------------
+> 
+> Læresteder med mindre enn 1500 semesterregistrerte studenter får én representant i
+> valgforsamlingen uansett størrelse og én representant per påbegynte 500. student i tillegg.
+
+> § 7 – Vedtaksdyktighet
+> ------------
+> 
+> Valgforsamlingen er vedtaksdyktig når minst halvparten av det beregnede antallet representanter er
+> til stede.
+
+Du finner [kildekoden til dette verktøyet på
+GitHub](http://github.com/velfundert/fordelingVTOA).
+
+Du finner [reglementet i sin helhet på nettsidene til Velferdstinget i Oslo og
+Akershus](http://www.studentvelferd.no/vt-dokumenter#vedtekter).
