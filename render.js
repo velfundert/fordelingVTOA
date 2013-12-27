@@ -7,6 +7,7 @@ function FordelingRender() {
     this.clear = clear;
     this.result = result;
     this.renderProcess = renderProcess;
+    this.renderVF = renderVF;
 
     console.log("Render loaded");
 

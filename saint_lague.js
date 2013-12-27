@@ -6,7 +6,6 @@ function SaintLague ( votes, noOfSeats ) {
     this.elect = elect;
     this.voteMax = voteMax;
     // this.result = result;
-    this.printVf = printVf;
 
     this.valgforsamling = new Array();
     this.noOfSeats = noOfSeats;
@@ -47,7 +46,7 @@ function SaintLague ( votes, noOfSeats ) {
                 temp_votes.push( this.votes[i] );
             } else {
                 temp_valgf += parseFloat( this.votes[i][0] );
-                this.valgforsamling.push( [ Math.ceil( parseFloat(this.valgforsamling[i][0])/500 ), this.votes[i][1] ] );
+                this.valgforsamling.push( [ Math.ceil( parseFloat(this.votes[i][0])/500 ) +1, this.votes[i][1] ] );
             }
         }
 
