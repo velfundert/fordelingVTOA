@@ -121,7 +121,12 @@ function errorHandler(evt) {
 
         <h3>Resultat</h3>
         <div id="resultbox"></div>
-        <div style="font-size:smaller" id="valgforsamling"></div>
+        <p id="notvalgforsamling"
+        onclick="document.getElementById('valgforsamling').style.display='block';this.style.display='none'"><strong>Valgforsaming (klikk
+            for å vise)</strong></p>
+        <div style="display:none;font-size:smaller;" id="valgforsamling"
+            ondblclick="document.getElementById('notvalgforsamling').style.display='block';document.getElementById('valgforsamling').style.display='none'"
+            title="Dobbeltklikk for å lukke"></div>
         </div>
     </body>
 </html>
