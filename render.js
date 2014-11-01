@@ -16,6 +16,7 @@ function FordelingRender() {
     }
 
     function addInstitution( students, name ) {
+        var tf0 = document.createElement("div");
         var tf1 = document.createElement("input");
         var tf2 = document.createElement("input");
         var trg = document.getElementById("studentNumbers");
@@ -23,12 +24,19 @@ function FordelingRender() {
         tf2.type="text";
         tf1.value = name;
         tf2.value = students;
+        tf0.setAttribute("id", "is" + this.institutionCount );
         tf1.setAttribute("id", "i" + this.institutionCount );
         tf2.setAttribute("id", "s" + this.institutionCount );
         this.institutionCount++;
-        trg.appendChild( document.createElement("br") );
-        trg.appendChild( tf1 );
-        trg.appendChild( tf2 );
+        tf0.appendChild( tf1 );
+        tf0.appendChild( tf2 );
+        trg.appendChild( tf0 );
+
+        // drag and drop-functions
+        tf0.setAttribute('draggable', true);
+        tf0.addEventListener('dragstart', handlestart, false);
+        tf0.addEventListener('dragover', handledragover, false);
+        tf0.addEventListener('drop', handledrop, false);
     }
 
     function clear() {
@@ -73,6 +81,37 @@ function FordelingRender() {
         }
         VFBox.appendChild( line );
     }
+
+    /* Drag and drop-related functions */
+function handledrop(e) {
+    console.log("Drop!");
+    dropped = document.getElementById(e.dataTransfer.getData("text/html"));
+
+    if ( dropped != e.target ) {
+        e.target.getElementsByTagName("input")[0].value =
+            e.target.getElementsByTagName("input")[0].value + " og " +
+            dropped.getElementsByTagName("input")[0].value;
+        e.target.getElementsByTagName("input")[1].value =
+            parseFloat( e.target.getElementsByTagName("input")[1].value) +
+            parseFloat( dropped.getElementsByTagName("input")[1].value );
+        dropped.remove();
+    }
+}
+
+function handledragover(e) {
+    console.log("over");
+    if (e.preventDefault()) {
+        e.preventDefault();
+    }
+
+    e.dataTransfer.dropEffect = "copy";
+}
+
+function handlestart(e) {
+    console.log("Start");
+    e.dataTransfer.setData("text/html", e.target.id );
+}
+
 
 }
 
