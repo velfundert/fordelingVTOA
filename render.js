@@ -1,5 +1,6 @@
-function FordelingRender() {
+function FordelingRender( mother ) {
 
+    this.mother = mother;
     this.institutionCount = 0;
 
     this.addField = addField;
@@ -9,11 +10,15 @@ function FordelingRender() {
     this.result = result;
     this.renderProcess = renderProcess;
     this.renderVF = renderVF;
+    this.returnChangeHandler = returnChangeHandler;
+    this.returnDropHandler = returnDropHandler;
+
 
     console.log("Render loaded");
 
     function addField() {
         this.addInstitution( "Studenter", "Institusjon");
+        this.mother.data.push([ 0, "Institusjon"]);
     }
 
     function addInstitution( students, name ) {
@@ -25,19 +30,21 @@ function FordelingRender() {
         tf2.type="text";
         tf1.value = name;
         tf2.value = students;
-        tf0.setAttribute("id", "is" + this.institutionCount );
+        tf0.setAttribute("id", "d" + this.institutionCount );
         tf1.setAttribute("id", "i" + this.institutionCount );
         tf2.setAttribute("id", "s" + this.institutionCount );
         this.institutionCount++;
         tf0.appendChild( tf1 );
         tf0.appendChild( tf2 );
         trg.appendChild( tf0 );
+        tf1.addEventListener('change', this.returnChangeHandler(), false);
+        tf2.addEventListener('change', this.returnChangeHandler(), false);
 
         // drag and drop-functions
         tf0.setAttribute('draggable', true);
         tf0.addEventListener('dragstart', handlestart, false);
         tf0.addEventListener('dragover', handledragover, false);
-        tf0.addEventListener('drop', handledrop, false);
+        tf0.addEventListener('drop', this.returnDropHandler(), false);
     }
 
     function addAllInstitutions ( data ) {
@@ -93,35 +100,52 @@ function FordelingRender() {
     }
 
     /* Drag and drop-related functions */
-function handledrop(e) {
-    console.log("Drop!");
-    dropped = document.getElementById(e.dataTransfer.getData("text/html"));
+    function returnDropHandler() {
+        var a = this.mother;
+        return function(e) {
+            console.log("Drop!");
+            dropped = document.getElementById(e.dataTransfer.getData("text/html"));
+            if ( dropped != e.target ) {
+                e.target.getElementsByTagName("input")[0].value =
+                    e.target.getElementsByTagName("input")[0].value + " og " +
+                    dropped.getElementsByTagName("input")[0].value;
+                e.target.getElementsByTagName("input")[1].value =
+                    parseFloat( e.target.getElementsByTagName("input")[1].value) +
+                    parseFloat( dropped.getElementsByTagName("input")[1].value );
+                // add something so that f.data is updated accordingly
+                a.updateValue( e.target.getElementsByTagName("input")[0].id );
+                a.updateValue( e.target.getElementsByTagName("input")[1].id );
+                a.delInstitution( dropped.getElementsByTagName("input")[0].id );
 
-    if ( dropped != e.target ) {
-        e.target.getElementsByTagName("input")[0].value =
-            e.target.getElementsByTagName("input")[0].value + " og " +
-            dropped.getElementsByTagName("input")[0].value;
-        e.target.getElementsByTagName("input")[1].value =
-            parseFloat( e.target.getElementsByTagName("input")[1].value) +
-            parseFloat( dropped.getElementsByTagName("input")[1].value );
-        dropped.remove();
+                // remove the dropped node:
+                dropped.parentNode.removeChild(dropped);
+            }
+        };
     }
-}
 
-function handledragover(e) {
-    console.log("over");
-    if (e.preventDefault()) {
-        e.preventDefault();
+    function handledragover(e) {
+        console.log("over");
+        if (e.preventDefault()) {
+            e.preventDefault();
+        }
+
+        e.dataTransfer.dropEffect = "copy";
     }
 
-    e.dataTransfer.dropEffect = "copy";
-}
+    function handlestart(e) {
+        console.log("Start");
+        e.dataTransfer.setData("text/html", e.target.id );
+    }
 
-function handlestart(e) {
-    console.log("Start");
-    e.dataTransfer.setData("text/html", e.target.id );
-}
+    /*
+    function handlechange(e) {
+        this.mother.updateValue( e.target.id );
+    }
+    */
 
-
+    function returnChangeHandler() {
+        var a = this.mother;
+        return function (e) { a.updateValue( e.target.id ); };
+    }
 }
 

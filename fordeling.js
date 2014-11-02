@@ -4,11 +4,13 @@ function Fordeling(data) {
     this.sort = sort;
     this.initiateFromData = initiateFromData;
     this.election = election;
+    this.updateValue = updateValue;
+    this.delInstitution = delInstitution;
 
     this.data;
     this.valgforsamling = new Array();
 
-    this.r = new FordelingRender();
+    this.r = new FordelingRender( this );
     this.s; // this will be the SaintLague-class
 
     function wash() {
@@ -55,14 +57,12 @@ function Fordeling(data) {
                 this.data.splice(i, 1);
                 // this implicitly iterates the array
             } else {
-                console.log(this.data[i][1].length );
                 ++i;
             }
         }
 
         this.sort();
 
-        console.log( this.data );
         this.r.addAllInstitutions( this.data );
 
     }
@@ -76,6 +76,27 @@ function Fordeling(data) {
         this.r.result( this.s );
         this.r.renderProcess( this.s );
 
+    }
+
+
+    function updateValue( id ) {
+        
+        var a;
+        if (id[0] == "s") {// studentcount -> data[i][0]
+            a = 0;
+        } else if (id[0] == "i") { // instname -> data[i][1]
+            a = 1;
+        } else {
+            return
+        }
+
+        this.data[ parseInt( id.substring(1) ) ][ a ] = document.getElementById(id).value;
+
+    }
+
+    function delInstitution( id ) {
+
+        this.data.splice( parseInt( id.substring(1) ), 1 );
     }
 
 

@@ -84,8 +84,8 @@ function errorHandler(evt) {
             <label>Last opp en .csv</label><input type="file" id="filet"
             onchange="startRead()"/>
             <input type="button" value="Last inn" onclick="startRead()"/>
-            <input type="button" value="wask" onclick="f.wash()"/>
-            <input type="button" value="eburt" onclick="f.election()"/>
+            <input type="button" value="Beregn valgforsamling" onclick="f.wash()"/>
+            <input type="button" value="Beregn mandater" onclick="f.election()"/>
         </form>
         <!--
         <span> eller </span>
@@ -101,7 +101,6 @@ function errorHandler(evt) {
             <br />
             <input type="button" onclick="myAddField()" value=" + " />
             <br />
-            <!-- <input type="submit" value="Compute!" /> -->
         </form>
 
         <p id="notProcessBox"
