@@ -4,6 +4,7 @@ function FordelingRender() {
 
     this.addField = addField;
     this.addInstitution = addInstitution;
+    this.addAllInstitutions = addAllInstitutions;
     this.clear = clear;
     this.result = result;
     this.renderProcess = renderProcess;
@@ -39,6 +40,15 @@ function FordelingRender() {
         tf0.addEventListener('drop', handledrop, false);
     }
 
+    function addAllInstitutions ( data ) {
+        this.clear();
+        var i = 0;
+        while ( i < data.length ) {
+            this.addInstitution( data[i][0], data[i][1] );
+            i++;
+        }
+    }
+
     function clear() {
        var trg = document.getElementById("studentNumbers");
        while (trg.lastChild) {
@@ -68,16 +78,16 @@ function FordelingRender() {
 
     }
 
-    function renderVF( slInst ) {
+    function renderVF( valgforsamling ) {
         var VFBox = document.getElementById("valgforsamling");
         var title = document.createElement("h3");
-        var j = slInst.valgforsamling.reduce( function(a,b) { return a + b[0]; }, 0 );
+        var j = valgforsamling.reduce( function(a,b) { return a + b[0]; }, 0 );
         title.innerHTML = "Valgforsamling (" + j + "/" + Math.ceil( j/2 ) + ")";
         VFBox.appendChild( title );
         
         var line = document.createElement("p");
-        for (var i = 0; i < slInst.valgforsamling.length; i++ ) {
-            line.innerHTML += slInst.valgforsamling[i][1] + ": "+ slInst.valgforsamling[i][0] +" plasser<br />";
+        for (var i = 0; i < valgforsamling.length; i++ ) {
+            line.innerHTML += valgforsamling[i][1] + ": "+ valgforsamling[i][0] +" plasser<br />";
         }
         VFBox.appendChild( line );
     }

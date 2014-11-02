@@ -5,14 +5,20 @@
         <link rel='stylesheet' id='responsive-style-css'  href='http://www.studentvelferd.no/wp-content/themes/responsive/style.css?ver=1.9.3.4' type='text/css' media='all' />
         <link rel='stylesheet' id='responsive-media-queries-css'  href='http://www.studentvelferd.no/wp-content/themes/responsive/core/css/style.css?ver=1.9.3.4' type='text/css' media='all' />
         <link rel='stylesheet' id='responsive-child-style-css'  href='http://www.studentvelferd.no/wp-content/themes/velferdstinget-responsive/style.css?ver=1.9.3.4' type='text/css' media='all' />
+        <style type="text/css">
+#studentNumbers div {
+    background-color: #aaa 
+}
+        </style>
         <script type="text/javascript" src="csv_parse.js"></script>
         <script type="text/javascript" src="render.js"></script>
         <script type="text/javascript" src="saint_lague.js"></script>
+        <script type="text/javascript" src="fordeling.js"></script>
         <script type="text/javascript">
-var r = new FordelingRender();
+var f = new Fordeling();
 
 function myAddField() {
-    r.addField();
+    f.r.addField();
 }
 
 function startRead() {  
@@ -38,6 +44,8 @@ function getAsText(readFile) {
 }
 
 function updateProgress(evt) {
+    /*
+    // You could do something here
     if (evt.lengthComputable) {
         // evt.loaded and evt.total are ProgressEvent properties
         var loaded = (evt.loaded / evt.total);
@@ -46,35 +54,15 @@ function updateProgress(evt) {
             // style.width = (loaded * 200) + "px";
         }
     }
+    */
 }
 
 function loaded(evt) {  
     // Obtain the read file data    
-    var fileString = evt.target.result;   
+    
+    f.initiateFromData( evt.target.result );
 
-    var p = new CSVparser;
-    p.parse( fileString );
-
-    p.sort();
-
-    var s = new SaintLague( p.data, 37 );
-    s.wash();
-
-    r.clear();
-    var i = 0;
-    while ( i < s.votes.length ) {
-        r.addInstitution( s.votes[i][0], s.votes[i][1] );
-        i++;
-    }
-
-    s.elect();
-
-    r.result( s );
-    r.renderProcess( s );
-
-    r.renderVF( s );
 }
-
 
 function errorHandler(evt) {
   if(evt.target.error.name == "NotReadableError") {
@@ -93,8 +81,11 @@ function errorHandler(evt) {
 
 
         <form id="csvDisBitch">
-            <label>Last opp en .csv</label><input type="file" id="filet" />
+            <label>Last opp en .csv</label><input type="file" id="filet"
+            onchange="startRead()"/>
             <input type="button" value="Last inn" onclick="startRead()"/>
+            <input type="button" value="wask" onclick="f.wash()"/>
+            <input type="button" value="eburt" onclick="f.election()"/>
         </form>
         <!--
         <span> eller </span>

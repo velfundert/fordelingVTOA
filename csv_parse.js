@@ -3,14 +3,13 @@ function CSVparser() {
     this.parse = parse;
     this.split = split;
     this.findSep = findSep;
-    this.sort = sort;
 
     this.data = new Array();
     this.sep = ',';
 
     function parse( CSVString ) {
 
-        var i=0;
+        var i = 0;
 
         this.findSep( CSVString.substr( 0, CSVString.indexOf("\n",0) ) );
 
@@ -18,9 +17,7 @@ function CSVparser() {
             var j = CSVString.indexOf("\n", i);
             if (j == -1) j = CSVString.length;
 
-            if ( !isNaN( CSVString[i]) ) {
-                this.data.push( this.split( CSVString.substr( i, j-i) ) );
-            }
+            this.data.push( this.split( CSVString.substr( i, j-i) ) );
 
             i = j+1;
         }
@@ -29,7 +26,10 @@ function CSVparser() {
     function split( line ) {
         // some code that fixes wild decimal separators ( , to . )
         var temp = line.split( this.sep );
-        temp[0] = temp[0].replace(",",".");
+        var i;
+        for ( i = 0; i < temp.length; ++i) {
+            temp[i] = temp[i].replace(",",".");
+        }
         return temp
         // return line.split( this.sep );
     }
@@ -52,10 +52,6 @@ function CSVparser() {
         if ( i != -1 ) return;
 
         console.log("could not determine separator!");
-    }
-
-    function sort() {
-        this.data = this.data.sort( function (a, b) { return b[0] - a[0]; } );
     }
 
 }
