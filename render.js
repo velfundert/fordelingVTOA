@@ -107,7 +107,7 @@ function FordelingRender( mother ) {
             dropped = document.getElementById(e.dataTransfer.getData("text/html"));
             if ( dropped != e.target ) {
                 e.target.getElementsByTagName("input")[0].value =
-                    e.target.getElementsByTagName("input")[0].value + " og " +
+                    e.target.getElementsByTagName("input")[0].value + " + " +
                     dropped.getElementsByTagName("input")[0].value;
                 e.target.getElementsByTagName("input")[1].value =
                     parseFloat( e.target.getElementsByTagName("input")[1].value) +

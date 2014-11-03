@@ -7,14 +7,14 @@ function Fordeling(data) {
     this.updateValue = updateValue;
     this.delInstitution = delInstitution;
 
-    this.data;
+    this.data = new Array();
     this.valgforsamling = new Array();
 
     this.r = new FordelingRender( this );
     this.s; // this will be the SaintLague-class
 
     function wash() {
-        // this function adds all institutions belov a certain size to an
+        // this function adds all institutions below a certain size to an
         // electoral assembly in  accordance with the regulations of the Welfare
         // Council of Oslo and Akershus
 
@@ -39,6 +39,7 @@ function Fordeling(data) {
 
     }
 
+    // how necessary is this function?
     function sort() {
         this.data = this.data.sort( function (a, b) { return b[0] - a[0]; } );
     }

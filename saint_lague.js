@@ -2,10 +2,8 @@ function SaintLague ( votes, noOfSeats ) {
 
     this.votecopy = votecopy;
     this.deepcopy = deepcopy;
-    this.wash = wash;
     this.elect = elect;
     this.voteMax = voteMax;
-    // this.result = result;
 
     this.valgforsamling = new Array();
     this.noOfSeats = noOfSeats;
@@ -19,41 +17,13 @@ function SaintLague ( votes, noOfSeats ) {
 
         for (var i = 0; i < this.noOfSeats; i++ ) {
             j = this.voteMax( temp_votes );
-            this.votelog.push("" + this.votes[j][1] + " får plass "+ (i+1) +", stemmetall: " + temp_votes[j] );
+            this.votelog.push("" + this.votes[j][1] + " fÃ¥r plass "+ (i+1) +", stemmetall: " + temp_votes[j] );
             this.seats[ j ][0] += 1;
             temp_votes[ j ] = this.votes[ j ][0] / ( 2 * this.seats[ j ][0] +1 );
         }
+        this.seats.sort( function (a, b) { return b[0] - a[0] } );
     }
 
-    /*
-    function result() {
-        for (var i = 0; i < this.seats.length; i++ ) 
-            console.log( this.seats[i][1] + ": " + this.seats[i][0] );
-    }
-    */
-
-
-    function wash() {
-        // this function adds all institutions belov a certain size to an
-        // electoral assembly in  accordance with the regulations of the Welfare
-        // Council of Oslo and Akershus
-
-        var temp_votes = new Array();
-        var temp_valgf = 0;
-
-        for (var i = 0; i < this.votes.length; i++ ) {
-            if ( this.votes[i][0] >= 1500 ) {
-                temp_votes.push( this.votes[i] );
-            } else {
-                temp_valgf += parseFloat( this.votes[i][0] );
-                this.valgforsamling.push( [ Math.ceil( parseFloat(this.votes[i][0])/500 ) +1, this.votes[i][1] ] );
-            }
-        }
-
-        temp_votes.push( [ temp_valgf, "Valgforsamling" ] );
-        this.votes = temp_votes;
-        this.seats = this.deepcopy( temp_votes );
-    }
 
     function votecopy( what ) {
         var temp = new Array();

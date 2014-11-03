@@ -22,7 +22,7 @@ function myAddField() {
 }
 
 function startRead() {  
-    // obtain input element through DOM 
+    // find the file-input element
 
     var file = document.getElementById('filet').files[0];
     if(file){
@@ -58,10 +58,8 @@ function updateProgress(evt) {
 }
 
 function loaded(evt) {  
-    // Obtain the read file data    
-    
+    // Get the read file data    
     f.initiateFromData( evt.target.result );
-
 }
 
 function errorHandler(evt) {
@@ -69,7 +67,6 @@ function errorHandler(evt) {
     // The file could not be read
   }
 }
-
 
         </script>
 
@@ -81,9 +78,10 @@ function errorHandler(evt) {
 
 
         <form id="csvDisBitch">
-            <label>Last opp en .csv</label><input type="file" id="filet"
-            onchange="startRead()"/>
-            <input type="button" value="Last inn" onclick="startRead()"/>
+            <label>Last opp en .csv</label><input type="file" id="filet" onchange="startRead()"/>
+            <!-- don't need this:
+                <input type="button" value="Last inn" onclick="startRead()"/>
+            -->
             <input type="button" value="Beregn valgforsamling" onclick="f.wash()"/>
             <input type="button" value="Beregn mandater" onclick="f.election()"/>
         </form>
@@ -104,19 +102,19 @@ function errorHandler(evt) {
         </form>
 
         <p id="notProcessBox"
-        onclick="document.getElementById('processbox').style.display='block';this.style.display='none'"><strong>Klikk for å vise stemmetellingen</strong></p>
+        onclick="document.getElementById('processbox').style.display='block';this.style.display='none'"><strong>Klikk for Ã¥ vise stemmetellingen</strong></p>
         <div style="display:none;background-color:#ccc;" id="processbox"
             ondblclick="document.getElementById('notProcessBox').style.display='block';document.getElementById('processbox').style.display='none'"
-            title="Dobbeltklikk for å lukke"></div>
+            title="Dobbeltklikk for Ã¥ lukke"></div>
 
         <h3>Resultat</h3>
         <div id="resultbox"></div>
         <p id="notvalgforsamling"
         onclick="document.getElementById('valgforsamling').style.display='block';this.style.display='none'"><strong>Valgforsaming (klikk
-            for å vise)</strong></p>
+            for Ã¥ vise)</strong></p>
         <div style="display:none;font-size:smaller;" id="valgforsamling"
             ondblclick="document.getElementById('notvalgforsamling').style.display='block';document.getElementById('valgforsamling').style.display='none'"
-            title="Dobbeltklikk for å lukke"></div>
+            title="Dobbeltklikk for Ã¥ lukke"></div>
         </div>
     </body>
 </html>
