@@ -88,7 +88,7 @@ function Fordeling(data) {
         } else if (id[0] == "i") { // instname -> data[i][1]
             a = 1;
         } else {
-            return
+            return;
         }
 
         this.data[ parseInt( id.substring(1) ) ][ a ] = document.getElementById(id).value;

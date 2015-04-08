@@ -32,6 +32,9 @@ function SaintLague ( votes, noOfSeats ) {
             temp.push( parseFloat( what[i][0] ) );
         }
         return temp;
+        /*
+         * return what.map( function( x ){ return parseFloat( x[0] ) );
+         */
     }
 
     function deepcopy( what ) {
@@ -42,6 +45,9 @@ function SaintLague ( votes, noOfSeats ) {
             temp[i][0] = 0;
         }
         return temp;
+        /*
+         * return what.map( function( x ){ return [ x[0], 0 ] } );
+         */
     }
 
     function voteMax( where ) {
