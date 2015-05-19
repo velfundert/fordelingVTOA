@@ -1,0 +1,27 @@
+{
+  "name": "fordelingvtoa",
+  "version": "0.5.0",
+  "description": "A simple system for computing seats in the Welfare Council in Oslo and Akershus",
+  "main": "index.html",
+  "directories": {
+    "doc": "doc"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/velfundert/fordelingVTOA.git"
+  },
+  "author": "Christian Strandenæs",
+  "license": "GPL v3",
+  "bugs": {
+    "url": "https://github.com/velfundert/fordelingVTOA/issues"
+  },
+  "homepage": "https://github.com/velfundert/fordelingVTOA#readme",
+  "devDependencies": {
+    "gulp": "^3.8.11",
+    "gulp-concat": "^2.5.2",
+    "gulp-mocha": "^2.0.1"
+  }
+}
