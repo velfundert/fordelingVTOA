@@ -15,13 +15,15 @@ gulp.task("build-tests", function() {
     .pipe(gulp.dest("test/built/"));
 });
 
-gulp.task('test', ["build-tests"], function() {
-  var mocha = require('gulp-mocha');
-  return gulp.src(['test/built/*.js'], { read: false })
+gulp.task("test", ["build-tests"], function() {
+  var mocha = require("gulp-mocha");
+  return gulp.src(["test/built/*.js"], { read: false })
     .pipe(mocha({
-      reporter: 'nyan',
-      // globals: {
-      //   should: require('should')
-      // }
+      reporter: "nyan",
     }));
+});
+
+gulp.task("clean", function(callback) {
+  var del = require("del");
+  del(["test/built/*"], callback);
 });
