@@ -4,6 +4,7 @@ function CSVparser() {
     this.split = split;
     this.findSep = findSep;
 
+    this.verbose = false;
     this.data = new Array();
     this.sep = ',';
 
@@ -40,10 +41,10 @@ function CSVparser() {
 
         if ( i != -1 ) {
             this.sep = ";";
-            console.log("separator is ; which isn't really the standard is it");
+            if ( this.verbose ) console.log("separator is ; which isn't really the standard is it");
             i = line.indexOf(",");
             if ( i != -1 ) {
-                console.log("someone has put , in the integers or something!!");
+                if ( this.verbose ) console.log("someone has put , in the integers or something!!");
             }
             return;
         }
@@ -51,7 +52,7 @@ function CSVparser() {
         i = line.indexOf(",");
         if ( i != -1 ) return;
 
-        console.log("could not determine separator!");
+        if ( this.verbose ) console.log("could not determine separator!");
     }
 
 }
