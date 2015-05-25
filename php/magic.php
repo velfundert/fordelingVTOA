@@ -24,7 +24,7 @@ function update_index( $key, $name ) {
 	
 	$index = json_decode( fread( $indexf, filesize( "index.json" ) ) );
 
-	array_push( $index, array( $key => $name ) );
+	array_push( $index, array( $key, $name ) );
 
 	fseek( $indexf, 0 );
 	fwrite( $indexf, json_encode( $index ) );
@@ -118,7 +118,7 @@ function get_action($request) {
 	if ( substr( $request["target"], 0, strlen( $THIS_BASENAME ) ) != $THIS_BASENAME )
 		header("HTTP/1.1 403 Forbidden");
 
-	$filename = "data/" . substr( $request["target"], strlen( $THIS_BASENAME ) -1 ) . ".json";
+	$filename = "data/" . ltrim( substr( $request["target"], strlen( $THIS_BASENAME ) -1 ), "/\\") . ".json";
 
 	// non-empty request --> send contents of file they wanted
 	if ( file_exists( $filename ) ) {

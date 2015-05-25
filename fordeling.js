@@ -44,13 +44,9 @@ function Fordeling(data) {
         this.data = this.data.sort( function (a, b) { return b[0] - a[0]; } );
     }
 
-    function initiateFromData( dataString ) {  
-        // Obtain the read file data    
+    function initiateFromData( studentarray ) {  
 
-        var p = new CSVparser;
-        p.parse( dataString );
-
-        this.data = p.data;
+        this.data = studentarray;
         
         var i;
         for ( i = 0; i < this.data.length; ) {

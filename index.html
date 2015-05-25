@@ -16,86 +16,7 @@
         <script type="text/javascript" src="render.js"></script>
         <script type="text/javascript" src="saint_lague.js"></script>
         <script type="text/javascript" src="fordeling.js"></script>
-        <script type="text/javascript">
-var f = new Fordeling();
-
-function myAddField() {
-    f.r.addField();
-}
-
-function isWellformed( f ) {
-    for (i = 0; i < f.length; ++i) {
-        if (f.charCodeAt(i) == 65533 ) {
-            // this will be true if you encounter a non-ascii latin1 character
-            // in data you've read as utf-8. don't ask me why.
-            console.log("File is not well formed");
-            return false;
-        }
-    }
-    console.log("file is good");
-    return true;
-}
-
-function startRead() {  
-    // find the file-input element
-
-    var file = document.getElementById('filet').files[0];
-    if(file){
-        getAsText(file, "UTF-8");
-    }
-}
-
-function startReadLatin1() {
-    var file = document.getElementById('filet').files[0];
-    if(file){
-        getAsText(file, "iso-8859-1");
-    }
-}
-
-function getAsText(readFile, encoding) {
-
-    var reader = new FileReader();
-
-    // Read file into memory as UTF-8      
-    reader.readAsText(readFile, encoding);
-
-    // Handle progress, success, and errors
-    reader.onprogress = updateProgress;
-    reader.onload = loaded;
-    reader.onerror = errorHandler;
-}
-
-function updateProgress(evt) {
-    /*
-    // You could do something here
-    if (evt.lengthComputable) {
-        // evt.loaded and evt.total are ProgressEvent properties
-        var loaded = (evt.loaded / evt.total);
-        if (loaded < 1) {
-            // Increase the prog bar length
-            // style.width = (loaded * 200) + "px";
-        }
-    }
-    */
-}
-
-function loaded(evt) {  
-    // Get the read file data    
-    if ( isWellformed( evt.target.result ) ) {
-        f.initiateFromData( evt.target.result );
-    } else {
-        startReadLatin1();
-    }
-}
-
-function errorHandler(evt) {
-  if(evt.target.error.name == "NotReadableError") {
-    // The file could not be read
-  }
-}
-
-        </script>
-
+				<script type="text/javascript" src="app.js"> </script>
 
     </head>
     <body>
@@ -103,7 +24,7 @@ function errorHandler(evt) {
         <p><a href="doc">Hvordan bruke denne siden</a></p>
 
 
-        <form id="csvDisBitch">
+        <form id="controls">
             <label>Last opp en .csv</label><input type="file" id="filet" onchange="startRead()"/>
             <!-- don't need this:
                 <input type="button" value="Last inn" onclick="startRead()"/>
@@ -136,7 +57,7 @@ function errorHandler(evt) {
         <h3>Resultat</h3>
         <div id="resultbox"></div>
         <p id="notvalgforsamling"
-        onclick="document.getElementById('valgforsamling').style.display='block';this.style.display='none'"><strong>Valgforsaming (klikk
+        onclick="document.getElementById('valgforsamling').style.display='block';this.style.display='none'"><strong>Valgforsamling (klikk
             for å vise)</strong></p>
         <div style="display:none;font-size:smaller;" id="valgforsamling"
             ondblclick="document.getElementById('notvalgforsamling').style.display='block';document.getElementById('valgforsamling').style.display='none'"
