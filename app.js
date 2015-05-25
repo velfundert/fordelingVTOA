@@ -63,9 +63,7 @@ function updateProgress(evt) {
 function loaded(evt) {  
 	// Get the read file data    
 	if ( isWellformed( evt.target.result ) ) {
-		var p = new CSVparser();
-		p.parse( evt.target.result );
-		f.initiateFromData( p.data );
+		f.initiateFromData( ParseCSV( evt.target.result ) );
 	} else {
 		startReadLatin1();
 	}
