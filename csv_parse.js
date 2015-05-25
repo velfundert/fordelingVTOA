@@ -23,22 +23,23 @@ function ParseCSV( csv_string ) {
 		}
 
 		i = line.indexOf(",");
-		if ( i != -1 ) return ",";
-	}
-
-	function split( line, sep ) {
-		// some code that fixes wild decimal separators ( , to . )
-		var temp = line.split( sep );
-
-		// this part fixes numbers with , as decimal separator
-		var i;
-		for ( i = 0; i < temp.length; ++i) {
-			temp[i] = temp[i].replace(",",".");
-		}
-		return temp
+		if ( i != -1 )
+			return ",";
 	}
 
 	var sep = findSep( csv_string.substr( 0, csv_string.indexOf("\n", 0)) );
+
+	if ( sep != "," ) {
+		function split( line, sep ) {
+			var temp = line.split( sep );
+
+			// some code that fixes wild decimal separators ( , to . )
+			return temp.map( function( val ) { return val.replace(",",".") });
+		}
+	} else {
+		var split = function( line, sep ) { return line.split( sep ) };
+	}
+
 	var data = new Array();
 
 	var i = 0;

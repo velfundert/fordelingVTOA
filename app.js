@@ -37,13 +37,29 @@ function getAsText(readFile, encoding) {
 
 	var reader = new FileReader();
 
-	// Read file into memory as UTF-8      
+	// Read file into memory
 	reader.readAsText(readFile, encoding);
 
 	// Handle progress, success, and errors
 	reader.onprogress = updateProgress;
 	reader.onload = loaded;
 	reader.onerror = errorHandler;
+}
+
+function loaded(evt) {  
+	// Get the read file data, check encoding, parse
+	if ( isWellformed( evt.target.result ) ) {
+		f.initiateFromData( ParseCSV( evt.target.result ) );
+	} else {
+		startReadLatin1();
+	}
+}
+
+function errorHandler(evt) {
+	if(evt.target.error.name == "NotReadableError") {
+		// The file could not be read
+		alert("Could not read file!");
+	}
 }
 
 function updateProgress(evt) {
@@ -58,20 +74,5 @@ function updateProgress(evt) {
 	}
 	}
 	*/
-}
-
-function loaded(evt) {  
-	// Get the read file data    
-	if ( isWellformed( evt.target.result ) ) {
-		f.initiateFromData( ParseCSV( evt.target.result ) );
-	} else {
-		startReadLatin1();
-	}
-}
-
-function errorHandler(evt) {
-	if(evt.target.error.name == "NotReadableError") {
-		// The file could not be read
-	}
 }
 
