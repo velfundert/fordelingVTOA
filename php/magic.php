@@ -2,6 +2,8 @@
 
 require("/wp-includes/pluggable.php")
 
+// CHANGE THIS TO MATCH YOUR SETUP
+$THIS_BASENAME = "/mandater/REST";
 
 function update_index( $key, $name ) {	
 	$indexf = fopen("index.json", "r+");
@@ -98,6 +100,7 @@ function post_action($request) {
 
 	// success. return new index:
 	header("HTTP/1.1 201 Created");
+	header("Content-Type: application/json");
 	echo json_encode( $index );
 
 	return;
@@ -105,21 +108,28 @@ function post_action($request) {
 
 function get_action($request) {
 
-	header("Content-Type: application/json");
-
-	// this:
 	// empty request --> send list of files
-	readfile("index.json");
+	if ( $request["target"] == $THIS_BASENAME ) {
+		header("Content-Type: application/json");
+		readfile("index.json");
+		return;
+	}
 
-	// TODO:
-	// create a format for $request
-	// use proper variable names
-	// add conditional checks
+	if ( substr( $request["target"], 0, strlen( $THIS_BASENAME ) ) != $THIS_BASENAME )
+		header("HTTP/1.1 403 Forbidden");
+
+	$filename = "data/" . substr( $request["target"], strlen( $THIS_BASENAME ) -1 ) . ".json";
 
 	// non-empty request --> send contents of file they wanted
-	if ( file_exists( $filename ) ) 
+	if ( file_exists( $filename ) ) {
+		header("Content-Type: application/json");
 		readfile( $filename );
+	} else {
+		header("HTTP/1.1 404 File Not Found");
+		echo "Could not find " . $filename . "!";
+	}
 
+	return;
 }
 
 function illegal_request($request_method) {
