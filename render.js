@@ -12,6 +12,8 @@ function FordelingRender( mother ) {
     this.renderVF = renderVF;
     this.returnChangeHandler = returnChangeHandler;
     this.returnDropHandler = returnDropHandler;
+    this.updateValue = updateValue;
+	this.delInstitution = delInstitution;
 
 
     console.log("Render loaded");
@@ -57,11 +59,11 @@ function FordelingRender( mother ) {
     }
 
     function clear() {
-       var trg = document.getElementById("studentNumbers");
-       while (trg.lastChild) {
-           trg.removeChild( trg.lastChild );
-       }
-       this.institutionCount = 0;
+        var trg = document.getElementById("studentNumbers");
+        while (trg.lastChild) {
+            trg.removeChild( trg.lastChild );
+        }
+        this.institutionCount = 0;
     }
 
     function result( slInst ) {
@@ -91,7 +93,7 @@ function FordelingRender( mother ) {
         var j = valgforsamling.reduce( function(a,b) { return a + b[0]; }, 0 );
         title.innerHTML = "Valgforsamling (" + j + "/" + Math.ceil( j/2 ) + ")";
         VFBox.appendChild( title );
-        
+
         var line = document.createElement("p");
         for (var i = 0; i < valgforsamling.length; i++ ) {
             line.innerHTML += valgforsamling[i][1] + ": "+ valgforsamling[i][0] +" plasser<br />";
@@ -101,7 +103,7 @@ function FordelingRender( mother ) {
 
     /* Drag and drop-related functions */
     function returnDropHandler() {
-        var a = this.mother;
+        var a = this;
         return function(e) {
             console.log("Drop!");
             dropped = document.getElementById(e.dataTransfer.getData("text/html"));
@@ -138,14 +140,34 @@ function FordelingRender( mother ) {
     }
 
     /*
-    function handlechange(e) {
-        this.mother.updateValue( e.target.id );
-    }
-    */
+       function handlechange(e) {
+       this.mother.updateValue( e.target.id );
+       }
+       */
 
     function returnChangeHandler() {
-        var a = this.mother;
+        var a = this;
         return function (e) { a.updateValue( e.target.id ); };
+    }
+
+    function updateValue( id ) {
+
+        var a;
+
+        if (id[0] == "s") {// studentcount -> data[i][0]
+            a = 0;
+        } else if (id[0] == "i") { // instname -> data[i][1]
+            a = 1;
+        } else {
+            return;
+        }
+
+        this.mother.updateValue( parseInt( id.substring(1) ), a, document.getElementById(id).value );
+
+    }
+
+    function delInstitution( id ) {
+        this.mother.delInstitution( parseInt( id ) );
     }
 }
 

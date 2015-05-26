@@ -10,7 +10,6 @@ function Fordeling(data) {
 	this.valgforsamling = [];
 
 	this.r = new FordelingRender( this );
-	this.s; // this will be the SaintLague-class
 
 	function wash() {
 		// this function adds all institutions below a certain size to an
@@ -70,29 +69,17 @@ function Fordeling(data) {
 	}
 
 
-	function updateValue( id ) {
+	function updateValue( id, type, value ) {
+		// id corresponds to line no, type corresponds to column
+		// 0 -> studentcount
+		// 1 -> institution name
 
-		var a;
-
-		if (id[0] == "s") {// studentcount -> data[i][0]
-			a = 0;
-		} else if (id[0] == "i") { // instname -> data[i][1]
-			a = 1;
-		} else {
-			return;
-		}
-
-		this.data[ parseInt( id.substring(1) ) ][ a ] = document.getElementById(id).value;
+		this.data[ id ][ type ] = value;
 
 	}
 
 	function delInstitution( id ) {
-
-		this.data.splice( parseInt( id.substring(1) ), 1 );
+		this.data.splice( id, 1 );
 	}
 
-
-	/* TODO
-	 * add export function (probably just cut-paste csv for now)
-	 */
 }

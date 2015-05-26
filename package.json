@@ -24,7 +24,6 @@
     "gulp": "^3.8.11",
     "gulp-concat": "^2.5.2",
     "gulp-jshint": "^1.11.0",
-    "gulp-jslint": "^0.2.2",
     "gulp-mocha": "^2.0.1"
   }
 }
