@@ -12,7 +12,7 @@ gulp.task("build-tests", function() {
 			"render.js",
 			"saint_lague.js",
 			"test/*js"] )
-		.pipe(gulpcat("csv_parse.js"))
+		.pipe(gulpcat("test.js"))
 		.pipe(gulp.dest("test/built/"));
 });
 
@@ -35,7 +35,8 @@ gulp.task("lint", function(callback) {
 			"saint_lague.js",
 			"fordeling.js",
 			"app.js",
-			"more.js" ])
+			"more.js",
+			"test/*.js"])
 		.pipe(jshint())
 		.pipe(jshint.reporter("default"));
 });

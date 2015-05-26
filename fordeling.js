@@ -62,12 +62,10 @@ function Fordeling(data) {
 
 	function election() {
 
-		this.s = new SaintLague( this.data, 37 );
+		var result = saintLagueElect( this.data, 37 );
 
-		this.s.elect();
-
-		this.r.result( this.s );
-		this.r.renderProcess( this.s );
+		this.r.result( result );
+		this.r.renderProcess( result );
 
 	}
 

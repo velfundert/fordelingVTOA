@@ -1,52 +1,10 @@
-function SaintLague ( votes, noOfSeats ) {
+function saintLagueElect( votes, noOfSeats ) {
 
-	this.votecopy = votecopy;
-	this.deepcopy = deepcopy;
-	this.elect = elect;
-	this.voteMax = voteMax;
-
-	this.valgforsamling = [];
-	this.noOfSeats = noOfSeats;
-	this.votes = votes;
-	this.seats = this.deepcopy( votes );
-	this.votelog = [];
-
-	function elect() {
-
-		var j = 0,
-			i,
-			temp_votes = this.votecopy( this.votes );
-
-		for ( i = 0; i < this.noOfSeats; i++ ) {
-			j = this.voteMax( temp_votes );
-			this.votelog.push("" + this.votes[j][1] + " får plass "+ (i+1) +", stemmetall: " + temp_votes[j] );
-			this.seats[ j ][0] += 1;
-			temp_votes[ j ] = this.votes[ j ][0] / ( 2 * this.seats[ j ][0] +1 );
-		}
-		this.seats.sort( function (a, b) { return b[0] - a[0]; } );
-	}
-
-
-	function votecopy( what ) {
-		var temp = [],
-			i;
-
-		for ( i = 0; i < what.length; i++) {
-			temp.push( parseFloat( what[i][0] ) );
-		}
-		return temp;
-	}
-
-	function deepcopy( what ) {
-		var temp = [],
-			i;
-
-		for ( i = 0; i < what.length; i++ ) {
-			temp.push( what[i].slice() );
-			temp[i][0] = 0;
-		}
-		return temp;
-	}
+	var i,
+		j = 0,
+		votelog = [],
+		seats = votes.map( function( val ) { return [ 0, val[1] ]; }),
+		temp_votes = votes.map( function( val ) { return parseFloat( val[0] ); });
 
 	function voteMax( where ) {
 		var m = 0,
@@ -61,4 +19,19 @@ function SaintLague ( votes, noOfSeats ) {
 		}
 		return w;
 	}
+
+	for ( i = 0; i < noOfSeats; i++ ) {
+		j = voteMax( temp_votes );
+		votelog.push("" + votes[j][1] + " får plass "+ (i+1) +", stemmetall: " + temp_votes[j] );
+		seats[ j ][0] += 1;
+		temp_votes[ j ] = votes[ j ][0] / ( 2 * seats[ j ][0] +1 );
+	}
+
+	seats.sort( function (a, b) { return b[0] - a[0]; } );
+
+	return {
+		"seats": seats,
+		"votelog": votelog
+	};
+
 }
