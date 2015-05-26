@@ -18,9 +18,8 @@ function isWellformed( f ) {
 }
 
 function startRead() {  
-	// find the file-input element
-
 	var file = document.getElementById('filet').files[0];
+
 	if(file){
 		getAsText(file, "UTF-8");
 	}
@@ -28,6 +27,7 @@ function startRead() {
 
 function startReadLatin1() {
 	var file = document.getElementById('filet').files[0];
+
 	if(file){
 		getAsText(file, "iso-8859-1");
 	}
@@ -49,7 +49,7 @@ function getAsText(readFile, encoding) {
 function loaded(evt) {  
 	// Get the read file data, check encoding, parse
 	if ( isWellformed( evt.target.result ) ) {
-		f.initiateFromData( ParseCSV( evt.target.result ) );
+		f.initiateFromData( parseCSV( evt.target.result ) );
 	} else {
 		startReadLatin1();
 	}

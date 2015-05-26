@@ -14,7 +14,7 @@
     "url": "git+https://github.com/velfundert/fordelingVTOA.git"
   },
   "author": "Christian Strandenæs",
-  "license": "GPL v3",
+  "license": "GPL-3.0",
   "bugs": {
     "url": "https://github.com/velfundert/fordelingVTOA/issues"
   },
@@ -23,6 +23,8 @@
     "del": "^1.1.1",
     "gulp": "^3.8.11",
     "gulp-concat": "^2.5.2",
+    "gulp-jshint": "^1.11.0",
+    "gulp-jslint": "^0.2.2",
     "gulp-mocha": "^2.0.1"
   }
 }

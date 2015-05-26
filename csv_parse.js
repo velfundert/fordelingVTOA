@@ -1,11 +1,17 @@
 /**
- * ParseCSV( csv_string [, verbose ] )
+ * parseCSV( csv_string [, verbose ] )
  *
- * ParseCSV parses a string from a csv-file, and returns an array
+ * parseCSV parses a string from a csv-file, and returns an array
  */
-function ParseCSV( csv_string ) {
+function parseCSV( csv_string ) {
 
-	var verbose = false;
+	var verbose = false,
+		sep,
+		split, 
+		i,
+		j,
+		data = [];
+
 	if (arguments.length > 1)
 		verbose = arguments[1];
 
@@ -27,31 +33,33 @@ function ParseCSV( csv_string ) {
 			return ",";
 	}
 
-	var sep = findSep( csv_string.substr( 0, csv_string.indexOf("\n", 0)) );
+	sep = findSep( csv_string.substr( 0, csv_string.indexOf("\n", 0)) );
 
 	if ( sep != "," ) {
-		function split( line, sep ) {
+		split = function ( line, sep ) {
 			var temp = line.split( sep );
 
 			// some code that fixes wild decimal separators ( , to . )
-			return temp.map( function( val ) { return val.replace(",",".") });
-		}
+			return temp.map( function( val ) { return val.replace(",","."); });
+		};
 	} else {
-		var split = function( line, sep ) { return line.split( sep ) };
+		split = function( line, sep ) {
+			return line.split( sep );
+		};
 	}
 
-	var data = new Array();
-
-	var i = 0;
+	i = 0;
 
 	while (i < csv_string.length) {
-		var j = csv_string.indexOf("\n", i);
+
+		j = csv_string.indexOf("\n", i);
+
 		if (j == -1)
 			j = csv_string.length;
 
 		data.push( split( csv_string.substr( i, j-i), sep ) );
 
-		i = j+1;
+		i = j +1;
 	}
 
 	return data;
