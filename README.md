@@ -11,5 +11,5 @@ Changelog v. 0.4
 
 - Changes in the institution-list is now actually reflected in the election as
   well.
-- Added drag-and-drop functionality to combine two schools
+- The draig-end-drop functionality has been added to combine the two schools
 - Some of the code has been refactored.
